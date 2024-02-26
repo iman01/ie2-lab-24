@@ -23,25 +23,25 @@ void fill_Student_Vector(std::vector<Student> &students){
 
     file.open("grades.txt", std::ios::in);
 
-
-
     std::string line;
 
     while(getline(file, line)){
 
-        Student a;
+        string name_from_file;
+        string surname_from_file;
+        vector<int> grades_from_file;
 
         size_t pos;
 
         pos = line.find(',');
 
-        a.name = line.substr(0, pos);
+        name_from_file = line.substr(0, pos);
 
         line = line.substr(pos+1);
 
         pos = line.find(',');
 
-        a.surname = line.substr(0, pos);
+        surname_from_file = line.substr(0, pos);
 
         line = line.substr(pos+1);
 
@@ -51,12 +51,16 @@ void fill_Student_Vector(std::vector<Student> &students){
 
             int b = std::stoi(line.substr(0, pos));
 
-            a.grades.emplace_back(b);
+            grades_from_file.emplace_back(b);
 
             line = line.substr(pos+1);
 
         }
 
+        Student a;
+        a.name = name_from_file;
+        a.surname = surname_from_file;
+        a.grades = grades_from_file;
         students.emplace_back(a);
 
     }
