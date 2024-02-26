@@ -1,0 +1,83 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+
+using namespace std;
+
+struct Student{
+
+    string name;
+    string surname;
+    vector<int> grades;
+
+
+};
+
+
+void fill_Student_Vector(std::vector<Student> &students){
+
+    std::fstream file;
+
+    file.open("grades.txt", std::ios::in);
+
+
+
+    std::string line;
+
+    while(getline(file, line)){
+
+        Student a;
+
+        size_t pos;
+
+        pos = line.find(',');
+
+        a.name = line.substr(0, pos);
+
+        line = line.substr(pos+1);
+
+        pos = line.find(',');
+
+        a.surname = line.substr(0, pos);
+
+        line = line.substr(pos+1);
+
+        for(int i = 0; i < 7; i++){
+
+            pos = line.find(',');
+
+            int b = std::stoi(line.substr(0, pos));
+
+            a.grades.emplace_back(b);
+
+            line = line.substr(pos+1);
+
+        }
+
+        students.emplace_back(a);
+
+    }
+
+}
+
+
+
+
+int main()
+
+{
+
+
+    std::vector<Student> students;
+
+    fill_Student_Vector(students);
+
+    cout << students[0].grades[2] <<endl; //this is just an example
+
+    return 0;
+
+
+}
