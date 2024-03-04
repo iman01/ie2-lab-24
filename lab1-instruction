@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+
+using namespace std;
+
+class Student {
+
+    std::string name;
+    std::string surname;
+    std::vector<float> grades;
+public:
+    Student()
+    {
+        cout << "A object was created" << endl;
+    }
+
+    ~Student()
+    {
+        cout << "A object was destructed" << endl;
+    }
+
+    bool add_grade(float grade) {
+        if (grade >= 2.0 && grade <= 5.0) {
+            // The grade is valid; let's add it and return true
+            grades.push_back(grade);
+            return true;
+        }
+        // The grade is invalid; let's return false
+        return false;
+    }
+
+    float calculate_grade() {
+        float sum = std::accumulate(grades.begin(), grades.end(), 0.0f);
+        return sum / grades.size();
+    }
+    void print_()
+    {
+        cout << name << "" << surname ;
+        for(auto grade : grades)
+        {
+            cout <<" " << grade;
+        }
+    }
+};
+
+
+
+int main()
+{
+    Student s1;
+
+    float final_grade = s1.calculate_grade();
+    s1.print_();
+
+    Student student;
+    Student s3;
+    std::cout << student.calculate_grade() << std::endl;
+    student.add_grade(8);
+    student.print_();
+
+    return 0;
+}
